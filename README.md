@@ -1,6 +1,6 @@
 # ChronoPay_Payment_Magento2
 
-Chronopay Payment Magento 2 modile.
+Chronopay Payment Magento 2 module.
 
 # Установка
 1. сначала зайдите в директорию Magento 2
