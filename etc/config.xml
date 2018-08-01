@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <chronopay>
+                <model>Chronopay\Payment\Model\ChronopayPayment</model>
+                <active>0</active>
+                <title>Chronopay Payment</title>
+                <order_status>pending</order_status>
+                <payments_url>http://payments.chronopay.com/</payments_url>
+            </chronopay>
+        </payment>
+    </default>
+</config>

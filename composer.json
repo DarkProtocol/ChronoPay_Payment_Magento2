@@ -1,0 +1,24 @@
+{
+    "name": "chronopay/payment",
+    "description": "ChronoPay Payment module for Magento 2",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=5.6.36"
+    },
+    "authors": [
+        {
+    	    "name": "Stepan Kushtuev",
+            "email": "svechnick1@gmail.com",
+            "role": "Developer"
+    	}
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Chronopay\\Payment\\": ""
+        }
+    }
+}
