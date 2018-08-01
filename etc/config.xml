@@ -7,7 +7,7 @@
                 <active>0</active>
                 <title>Chronopay Payment</title>
                 <order_status>pending</order_status>
-                <payments_url>http://payments.chronopay.com/</payments_url>
+                <payments_url>https://payments.chronopay.com/</payments_url>
             </chronopay>
         </payment>
     </default>

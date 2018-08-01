@@ -82,8 +82,8 @@ class Callback extends \Magento\Framework\App\Action\Action
 			return $this->_redirect('/');
 		}
 
-		// check order id pending payment
-		if (!$this->chronopayModel->isOrderPendingForChronopay($order)) {
+		// check order id pending payment and transaction type
+		if (!$this->chronopayModel->isOrderPendingForChronopay($order) || $transactionType != self::PURCHASE_TRANSACTION_TYPE) {
 			return $this->_redirect('/');
 		}
 
