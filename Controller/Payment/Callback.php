@@ -8,6 +8,17 @@ namespace Chronopay\Payment\Controller\Payment;
 class Callback extends \Magento\Framework\App\Action\Action
 {	
 
+	/**
+	 * Purchase transaction_type
+	 */
+	const PURCHASE_TRANSACTION_TYPE = 'Purchase';
+
+
+	/**
+	 * Refund transaction_type
+	 */
+	const REFUND_TRANSACTION_TYPE = 'Refund';
+
 
 	/** @var \Magento\Sales\Model\OrderFactory */
 	private $orderFactory;
@@ -29,6 +40,7 @@ class Callback extends \Magento\Framework\App\Action\Action
 	 * @param \Magento\Sales\Model\OrderFactory $orderFactory
 	 * @param \Chronopay\Payment\Helper\Data $dataHelper
 	 * @param \Chronopay\Payment\Model\ChronopayPayment $chronopayModel
+	 *
 	 * @return boolean
 	 */
 	public function __construct(
@@ -48,6 +60,8 @@ class Callback extends \Magento\Framework\App\Action\Action
 
 	/** 
 	 * Execute action
+	 *
+	 * @return boolean
 	 */
 	public function execute()
 	{	
@@ -83,13 +97,25 @@ class Callback extends \Magento\Framework\App\Action\Action
 		}
 
 		// check order id pending payment and transaction type
-		if (!$this->chronopayModel->isOrderPendingForChronopay($order) || $transactionType != self::PURCHASE_TRANSACTION_TYPE) {
-			return $this->_redirect('/');
+
+		// if purchase
+		if (
+			$this->chronopayModel->isOrderPendingForChronopay($order) 
+			&& $transactionType == self::PURCHASE_TRANSACTION_TYPE
+		) {
+			$order->setStatus(\Chronopay\Payment\Model\ChronopayPayment::CHRONOPAY_SUCCESS_STATUS_CODE);
+			$order->save();
+		}	
+
+		// if refund
+		if (
+			$this->chronopayModel->isOrderSuccessForChronopay($order) 
+			&& $transactionType == self::REFUND_TRANSACTION_TYPE
+		) {
+			$order->setStatus(\Chronopay\Payment\Model\ChronopayPayment::CHRONOPAY_REFUND_STATUS_CODE);
+			$order->save();
 		}
 
-		// change status code
-		$order->setStatus(\Chronopay\Payment\Model\ChronopayPayment::CHRONOPAY_SUCCESS_STATUS_CODE);
-		$order->save();
 
 	    return $this->_redirect('/');
 	}

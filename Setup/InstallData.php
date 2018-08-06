@@ -53,6 +53,12 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
             ChronopayPayment::CHRONOPAY_SUCCESS_STATUS_CODE,
             ChronopayPayment::CHRONOPAY_SUCCESS_STATUS_LABEL
         );
+
+        // add refund status
+        $this->addStatus(
+            ChronopayPayment::CHRONOPAY_REFUND_STATUS_CODE,
+            ChronopayPayment::CHRONOPAY_REFUND_STATUS_LABEL
+        );
     }
 
 
