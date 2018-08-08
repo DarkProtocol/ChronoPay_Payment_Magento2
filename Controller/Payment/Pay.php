@@ -86,7 +86,8 @@ class Pay extends \Magento\Framework\App\Action\Action
 		if ($order->save()) {
 			// if save status -> generate payment and redirect to url
 			$orderPrice = (float)$order->getGrandTotal() - (float)$order->getShippingAmount();
-			$redirectUrl = $this->dataHelper->generatePaymentUrl($orderId, $orderPrice);
+			$successUrl = $this->_url->getUrl('checkout/onepage/success');
+			$redirectUrl = $this->dataHelper->generatePaymentUrl($orderId, $orderPrice, $successUrl);
 			return $this->_redirect($redirectUrl);
 		}
 

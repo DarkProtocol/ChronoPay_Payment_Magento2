@@ -107,16 +107,18 @@ class Data extends AbstractHelper
 	 *
 	 * @param string $orderId
 	 * @param float $orderPrice
+	 * @param string $successUrl
 	 *
 	 * @return string
 	 */
-	public function generatePaymentUrl($orderId, $orderPrice)
+	public function generatePaymentUrl($orderId, $orderPrice, $successUrl)
 	{
 		$url = $this->getPaymentsUrl();
 		$url .= '?product_id=' . urlencode($this->getProductId());
 		$url .= '&sign=' . urlencode($this->generatePaymentSign($orderPrice, $orderId));
 		$url .= '&order_id=' . urlencode($orderId);
 		$url .= '&product_price=' . urlencode($orderPrice);
+		$url .= '&success_url=' . urlencode($successUrl);
 
 		return $url;
 	}

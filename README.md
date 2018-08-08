@@ -35,6 +35,6 @@ php bin/magento setup:upgrade
 # Настройка
 Далее зайдите в Stores -> Configuration -> Sales -> Payment Methods -> Chronopay Payment и заполните поля.
 SharedSec, Product ID Вам должны выдать. Payments Url (по умолчанию https://payments.chronopay.com) это url, где будет генерироваться оплата (если вы понятия не имеете, что это, то оставьте без изменений). Title - название платежной системы на странице оформления. Все поля обязательны для заполнения, иначе модуль не будет работать.
-Callback url или cbUrl (на этот url приходят подтверждения оплаты) для Вашего магазина будет http://yourdomain.com/chronopay/payment/callback
+Callback url или cbUrl (на этот url приходят подтверждения оплаты) для Вашего магазина будет http://yourdomain.com/chronopay/payment/callback. После успешной оплаты пользователь будет перенаправлен на Success Page  (http://yourdomain.com/checkout/onepage/success/)
 
 
