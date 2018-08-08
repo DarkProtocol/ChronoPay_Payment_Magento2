@@ -127,8 +127,8 @@ class Data extends AbstractHelper
 	/**
 	 * Generate payment sign
 	 *
-	 * @param string $orderId
 	 * @param float $orderPrice
+	 * @param string $orderId
 	 *
 	 * @return string
 	 */
