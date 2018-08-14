@@ -20,8 +20,8 @@ php bin/magento setup:upgrade
 
 После этого шага, модуль должен быть установлен. 
 
-В системе должны появится 2 новых статуса заказа: `chronopay_payment_pending`
-и `chronopay_payment_success`.
+В системе должны появится 3 новых статуса заказа: `chronopay_payment_pending`
+и `chronopay_payment_success`, `chronopay_payment_refund`.
 
 `chronopay_payment_pending` означает, что пользователь посетил страницу оплаты ChronoPay, но подтверждение о его транзакции еще не пришло.
 
