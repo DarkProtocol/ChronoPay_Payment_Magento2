@@ -31,6 +31,7 @@ class InstallData implements \Magento\Framework\Setup\InstallDataInterface
         $this->statusResourceFactory = $statusResourceFactory;
     }
 
+
     /**
      * Installs data for a module
      *
