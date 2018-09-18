@@ -7,27 +7,70 @@
 
                 <frontend_model>Chronopay\Payment\Block\System\Config\FrontendModel</frontend_model>
 
-                <field id="active" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="active" translate="label comment" sortOrder="1" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 
-                <field id="title" translate="label comment" sortOrder="1" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="title" translate="label comment" sortOrder="2" type="text" showInDefault="2" showInWebsite="2" showInStore="2">
                     <label>Title</label>
                 </field>
                 
-                <field id="payments_url" translate="label comment" sortOrder="1" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="payments_url" translate="label comment" sortOrder="3" type="text" showInDefault="3" showInWebsite="3" showInStore="3">
                     <label>Payments Url</label>
+                    <comment>URL перенаправления на страницу оплаты (если не знаете, что это, оставьте поле пустым)</comment>
                 </field>
 
-                <field id="product_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="product_id" translate="label" type="text" sortOrder="4" showInDefault="4" showInWebsite="4" showInStore="4">
                     <label>Product ID</label>
+                    <comment>Product ID из личного кабинета ChronoPay.</comment>
                     <validate>validate-no-empty</validate>
                 </field>
 
-                <field id="sharedsec" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="sharedsec" translate="label" type="text" sortOrder="5" showInDefault="5" showInWebsite="5" showInStore="5">
                     <label>SharedSec</label>
+                    <comment>SharedSec из личного кабинета ChronoPay.</comment>
                     <validate>validate-no-empty</validate>
+                </field>
+
+                <field id="cbUrl" translate="label" type="text" sortOrder="6" showInDefault="6" showInWebsite="6" showInStore="6">
+                    <label>Cb Url</label>
+                    <comment>URL для отправки уведомления о платеже. (Оставьте поле пустым, если вы не делали свой cb_url)</comment>
+                </field>
+
+                <field id="cbType" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cb Type</label>
+                    <comment>Метод отправки уведомления о платеже</comment>
+                </field>
+
+                <field id="successUrl" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Success Url</label>
+                    <comment>URL страницы в системе Продавца для перенаправления Покупателя в случае успешной оплаты. (По умолчанию будет стандартная страница успешной оплаты Magento)</comment>
+                </field>
+
+                <field id="declineUrl" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Decline Url</label>
+                    <comment>URL страницы в системе Продавца для перенаправления Покупателя в случае неуспешной попытки оплаты.</comment>
+                </field>
+
+                <field id="paymentTypeGroupId" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Type Group Id</label>
+                    <comment>Идентификатор Платежного инструмента, который используется для его автовыбора.</comment>
+                </field>
+
+                <field id="language" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Language</label>
+                    <comment>Язык отображаемых Покупателю страниц в процессе оформления им платежа на стороне платежной платформы.</comment>
+                </field>
+
+                <field id="orderTimelimit" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Time Limit</label>
+                    <comment>Максимальное время нахождения Покупателя на платежной странице в минутах. Укажите целые числа. (Укажите либо orderTimelimit, либо orderExpiretime)</comment>
+                </field>
+
+                <field id="orderExpiretime" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Expire Time</label>
+                    <comment>Дата и время истечения резерва заказа. Укажите количество минут в целых числах. (Укажите либо orderTimelimit, либо orderExpiretime)</comment>
                 </field>
 
             </group>

@@ -2,11 +2,14 @@
 
 namespace Chronopay\Payment\Controller\Payment;
 
+use Chronopay\Payment\Helper\CountryCodes;
+use Chronopay\Payment\Helper\CustomerData;
+
 /**
  * Class Pay init payment and redirect to payment url
  */
 class Pay extends \Magento\Framework\App\Action\Action
-{	
+{   
 
     /** @var \Magento\Sales\Model\OrderFactory */
     private $orderFactory;
@@ -22,7 +25,7 @@ class Pay extends \Magento\Framework\App\Action\Action
     /** @var \Chronopay\Payment\Model\ChronopayPayment */
     private $chronopayModel;
 
-	
+    
     /**
      * Construct
      *
@@ -55,7 +58,7 @@ class Pay extends \Magento\Framework\App\Action\Action
      * Execute action
      */
     public function execute()
-    {	
+    {   
 
         // get last order id
         $orderId = $this->checkoutSession->getLastOrderId();
@@ -84,10 +87,31 @@ class Pay extends \Magento\Framework\App\Action\Action
         $order->setStatus(\Chronopay\Payment\Model\ChronopayPayment::CHRONOPAY_PENDING_STATUS_CODE);
 
         if ($order->save()) {
+            
             // if save status -> generate payment and redirect to url
             $orderPrice = (float)$order->getGrandTotal() - (float)$order->getShippingAmount();
             $successUrl = $this->_url->getUrl('checkout/onepage/success');
-            $redirectUrl = $this->dataHelper->generatePaymentUrl($orderId, $orderPrice, $successUrl);
+
+
+            // add data
+            $customerData = new CustomerData();
+
+            if ($order->getBillingAddress()->getCountryId()) {
+                $customerData->setCountry(
+                    CountryCodes::$countries[strtoupper($order->getBillingAddress()->getCountryId())]['alpha3']
+                );
+            }
+
+            $customerData->setCity($order->getBillingAddress()->getCity())
+                         ->setStreet($order->getBillingAddress()->getData('street'))
+                         ->setState($order->getBillingAddress()->getRegion())
+                         ->setZip($order->getBillingAddress()->getPostcode())
+                         ->setEmail($order->getBillingAddress()->getEmail())
+                         ->setPhone($order->getBillingAddress()->getTelephone())
+                         ->setFirstName($order->getBillingAddress()->getFirstname())
+                         ->setLastName($order->getBillingAddress()->getLastname());
+
+            $redirectUrl = $this->dataHelper->generatePaymentUrl($customerData, $orderId, $orderPrice, $successUrl);
             return $this->_redirect($redirectUrl);
         }
 
